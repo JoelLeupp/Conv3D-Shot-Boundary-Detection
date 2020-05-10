@@ -49,7 +49,6 @@ sol_cut = eva.read_cuts(csv, frame_nr)
 predict_cut = eva.read_cuts('test_data/predict.csv', frame_nr)
 cineast_cut = eva.read_cuts('test_data/cineast.csv', frame_nr)
 
-
 res_pre = eva.evaluate_SBD(prediction=predict_cut,solution=sol_cut)
 res_cin = eva.evaluate_SBD(prediction=cineast_cut,solution=sol_cut)
 test_result = dict(conv3D_model = res_pre, cineast = res_cin )
@@ -57,15 +56,3 @@ test_result = dict(conv3D_model = res_pre, cineast = res_cin )
 with open('test_data/test_result.json','w') as f:
     json.dump(test_result, f, indent = 4)
 
-############################ VISUALISATION OF PREDICTION #####################
-#prediction from model
-gen = datagen(10,video, 'test_data/predict.csv')
-gen.eval_csv()
-
-#prediction from cineast
-gen = datagen(10,video, 'test_data/cineast.csv')
-gen.eval_csv()
-
-#true cuts as reference
-gen = datagen(10,video, csv)
-gen.eval_csv()
