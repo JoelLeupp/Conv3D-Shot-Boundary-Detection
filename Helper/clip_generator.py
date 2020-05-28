@@ -1,28 +1,27 @@
-'''
-Video generator from multiple sample videos
-'''
-
 import glob
 import numpy as np 
 from math import ceil
-from augmentation_helper import speed,shift_channel,shift_hue,bw,blur,artifical_flash,fade
+from clip_augmentation import shift_channel,shift_hue,bw,blur,artifical_flash,fade
 from moviepy.editor import VideoFileClip
 
 #list of all functions for augmentation of videos
-process=[speed,shift_channel,shift_hue,bw,blur,artifical_flash,fade,fade]
+process=[shift_channel,shift_hue,bw,blur,artifical_flash,fade,fade]
 
-def video_generator(sample_vid_set,samples=10,split=.5,prob_process=.5):
+def clip_generator(sample_vid_set,samples=10,split=.5,prob_process=.5,is_rand_sample=True):
     sample_count=0;sample=0
     process_len=len(process)
     sample_len=len(sample_vid_set)
     while (sample_count<samples):
         sample_count+=1
-        sample_rand=int(np.random.rand()*sample_len)-1
-        #accounting for same spawn
-        while sample == sample_rand:
+        if is_rand_sample:
             sample_rand=int(np.random.rand()*sample_len)-1
-            print("same spawn ({},{}) changed to ({},{})".format(sample,sample,sample,sample_rand))
-        sample=sample_rand
+            #accounting for same spawn
+            while sample == sample_rand:
+                sample_rand=int(np.random.rand()*sample_len)-1
+                print("same spawn ({},{}) changed to ({},{})".format(sample,sample,sample,sample_rand))
+            sample=sample_rand
+        else:
+            sample = sample_count-1
 
         sample_vid=sample_vid_set[sample]
         try:

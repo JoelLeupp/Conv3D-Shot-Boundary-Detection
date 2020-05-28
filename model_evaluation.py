@@ -27,8 +27,8 @@ model.load_weights(model_weight)
 
 try:
     print("loading Data")
-    image_data=np.load('im_data.npy', allow_pickle=True)
-    cut=np.load('cut.npy', allow_pickle=True)
+    image_data=np.load('test_im_data.npy', allow_pickle=True)
+    cut=np.load('test_cut.npy', allow_pickle=True)
     cut = to_categorical(cut)
     print('#'*70)
     print("data has been loaded")

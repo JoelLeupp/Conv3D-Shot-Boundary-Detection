@@ -1,8 +1,3 @@
-
-'''
-Contains all the augmentation functions
-'''
-
 import numpy as np
 from math import sqrt,exp,floor,ceil
 from moviepy.editor import vfx
@@ -11,8 +6,11 @@ from random import shuffle
 from random import getrandbits
 from moviepy.editor import VideoFileClip
 
-#take a picture and fade in or out to a white or black screen
-def fade(clip): #pass images here to fade between
+
+def fade(clip): 
+    """
+    fade in or out to a white or black screen
+    """
     white = bool(getrandbits(1))
     revert = bool(getrandbits(1))
     step = np.random.uniform(0.06,0.1)
@@ -29,24 +27,6 @@ def fade(clip): #pass images here to fade between
         dst = cv2.addWeighted( frame, 1-fadein, panel, fadein, 0)
         return(dst)
     return(clip.fl(lambda gf,t : pipe(gf(t),int(t*clip.fps))))
-
-   
-def scroll(get_frame, t):
-    """
-    This function returns a 'region' of the current frame.
-    The position of this region depends on the time.
-    """
-    frame = get_frame(t)
-    frame_region = frame[int(t):int(t)+360,:]
-    return frame_region
-
-def speed(clip,val_min=2,val_max=5):
-    """
-    This function returns a video at a random speed
-    """
-    
-    speed=min(.5,max(abs(np.random.normal(loc=1.0)),val_max))
-    return(clip.fx(vfx.speedx,speed))
 
 def shift_channel(clip):
     """

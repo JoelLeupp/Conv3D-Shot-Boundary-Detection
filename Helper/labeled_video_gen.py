@@ -1,31 +1,25 @@
-'''
-Code for generating the augmented dataset resulting a .mp4 file and .csv file. 
-'''
-
 import glob
 import numpy as np 
-from math import ceil
-from augmentation_helper import speed,shift_channel,shift_hue,bw,blur,artifical_flash
-from moviepy.editor import VideoFileClip,concatenate_videoclips
 import pandas as pd
-from math import ceil
-from dataset_generator import video_generator
-from dataset_generator import video_generator2
+from clip_generator import clip_generator
 import os
 import cv2
 
 #gathering the video samples to be augmented and generated
-root="directory to video clips"
-sample_vid_set=glob.glob(os.path.join(root,'output tv2007d/*.mp4'))
-
-out_folder = "outfolder ot test/train data"
+#direcory at Helper
+sample_vid_set=glob.glob('../output tv2007d/*.mp4')
+out_folder = "../train_data"
 out_temp = os.path.join(out_folder,'temp')
+out_name = 'test'
 
-#using the generator to augment clips
-for i,aug_clip in video_generator(sample_vid_set,samples=1000):
+#creating a temporary folder for the augmented videos
+os.mkdir(out_temp)
+
+#augment random videos with flash, fade-in/out, hue shifts ect.
+for i,aug_clip in clip_generator(sample_vid_set,samples=10, is_rand_sample=False):
    aug_clip.write_videofile(os.path.join(out_temp,"temp_"+str(i)+".mp4"))
        
-       
+#go through all clips and create an mp4 and a csv with all cuts
 videofiles = glob.glob(out_temp+ '/*.mp4')
 videofiles.sort()
 
@@ -33,7 +27,7 @@ video_index = 0
 cap = cv2.VideoCapture(videofiles[0])
 
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-output = os.path.join(out_folder, 'final.mp4')
+output = os.path.join(out_folder, out_name+'.mp4')
 out = cv2.VideoWriter(output, fourcc, 15, (320, 240), 1)
 
 csv_data=pd.DataFrame(columns=['frame_no'])
@@ -59,5 +53,8 @@ while(cap.isOpened()):
 
 cap.release()
 out.release()
-csv_data.to_csv(os.path.join(out_folder,"aug_data_eval.csv"))
+csv_data.to_csv(os.path.join(out_folder,out_name+".csv"))
+
+
+
 

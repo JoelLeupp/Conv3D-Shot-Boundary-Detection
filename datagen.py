@@ -1,14 +1,13 @@
-'''
-Datagenerator from the video file and CSV dataset to retrieve corresponding frames. 
- 
-'''
-
 import cv2
 import argparse
 import numpy as np
 from math import ceil,floor
 import pandas as pd 
 
+'''
+Datagenerator from the video file and CSV dataset to retrieve corresponding frames. 
+ 
+'''
 class datagen():
     def __init__(self,no_frames,video_file=None,csv_file=None):
         if video_file==None:

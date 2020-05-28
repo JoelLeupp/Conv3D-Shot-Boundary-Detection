@@ -14,7 +14,7 @@ import pandas as pd
 
 root_deepSBD = "directory to DeepSBD dataset"
 
-output_folder='output tv2007d' #'output tv2007t'
+output_folder='../output tv2007d' #'output tv2007t'
 
 top_folder = "tv2007d/synthetic/sharps" #"tv2007t/synthetic/sharps"
 top_children = os.path.join(root_deepSBD,top_folder)
