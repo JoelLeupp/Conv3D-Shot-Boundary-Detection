@@ -1,4 +1,5 @@
 # Conv3D-Shot-Boundary-Detection
+The automatically generated labeled shot boundary dataset and the used convolutional model is inspired by the paper 'Ridiculously Fast Shot Boundary Detection with Fully Convolutional Neural Networks' which can be found here: https://arxiv.org/abs/1705.08214
 
 ## Data Collection
 1. Download this big dataset for shot boundary detection:  https://nsl.cs.sfu.ca/projects/DeepSBD/dataset/DeepSBD.tar.gz
@@ -12,9 +13,17 @@ specify the folder from which you want to take the shots from and how many rando
 (For the training dataset I took 10'000 samples from tv200d)
 
 What does it do exactly?
-From the specifyed folder it takes a random shot and with a given probability it will modify the shot with a random process from the Helper/clip_editor.py such as fade-in/out, artificial flash, random hue changes, color channel shuffle, random bw frames and random blur
+From the specifyed folder it takes a random shot and with a given probability it will modify the shot with a random process from the Helper/clip_editor.py such as fade-in/out, artificial flash, random hue changes, color channel shuffle, random bw frames and random blur.
 
-repeat this process for how many samples where given and in the end add all these clips together to create the mp4 video, while adding the clips it count the frames and creates a CSV file which stores the number of all frames with a transition.
+Repeat this process for how many samples where given and in the end add all these clips together to create the mp4 video, while adding the clips it count the frames and creates a CSV file which stores the number of all frames with a transition.
+
+## 3D Convolutional Model
+Input Shape: (None,64,64,10,3)
+
+
+![](https://github.com/JoelLeupp/Conv3D-Shot-Boundary-Detection/blob/master/model.png)
+
+
 
 
 
