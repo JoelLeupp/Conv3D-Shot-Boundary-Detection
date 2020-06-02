@@ -1,7 +1,7 @@
 import glob
 import numpy as np 
 from math import ceil
-from clip_augmentation import shift_channel,shift_hue,bw,blur,artifical_flash,fade
+from clip_editor import shift_channel,shift_hue,bw,blur,artifical_flash,fade
 from moviepy.editor import VideoFileClip
 
 #list of all functions for augmentation of videos

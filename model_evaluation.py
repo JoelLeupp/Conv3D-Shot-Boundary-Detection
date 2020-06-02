@@ -10,7 +10,7 @@ import os
 import numpy as np
 from tensorflow.keras.utils import to_categorical
 import evaluation as eva
-from datagen import datagen
+from gen_training_data import create_dataset_small
 import json
 import cv2
 
@@ -22,25 +22,31 @@ model3D = Conv3D_model()
 #model3D.train(epoch=100, batch_size=32, out_weight='newWeights.h5')
 
 model= Conv3D_model().model_3d
-model_weight='Weights.h5'
+model_weight='modelWeights.h5' #Weights.h5
 model.load_weights(model_weight)
+
+#prepare data
+#create_dataset_small(video, csv,'test_data/eval_')
 
 try:
     print("loading Data")
-    image_data=np.load('test_im_data.npy', allow_pickle=True)
-    cut=np.load('test_cut.npy', allow_pickle=True)
+    image_data=np.load('test_data/eval_im_data.npy', allow_pickle=True)
+    cut=np.load('test_data/eval_cut.npy', allow_pickle=True)
     cut = to_categorical(cut)
     print('#'*70)
     print("data has been loaded")
+    #predict cuts with prepared data
+    p=model.predict(image_data)
 
 except:
-    print('create training data first')
-    model3D.create_dataset(video, csv)
+    print('No prepared data yet! loop through whole video')
+    p = model3D.predict_shots(video,csv, 'modelWeights.h5')
+    
+#predict cuts while running through video
+#p = model3D.predict_shots(video,csv, 'Weights.h5')
 
-#model.evaluate(image_data,cut)
-p=model.predict(image_data)
 res = [np.argmax(y, axis=None, out=None) for y in p]
-cut=[np.argmax(y, axis=None, out=None) for y in cut]
+#cut=[np.argmax(y, axis=None, out=None) for y in cut]
 
 frame_nr =eva.get_frame_nr(video)
 eva.save_csv(res[5:],'test_data/predict.csv')
@@ -53,6 +59,5 @@ res_pre = eva.evaluate_SBD(prediction=predict_cut,solution=sol_cut)
 res_cin = eva.evaluate_SBD(prediction=cineast_cut,solution=sol_cut)
 test_result = dict(conv3D_model = res_pre, cineast = res_cin )
 
-with open('test_data/test_result.json','w') as f:
+with open('test_data/eval_result.json','w') as f:
     json.dump(test_result, f, indent = 4)
-

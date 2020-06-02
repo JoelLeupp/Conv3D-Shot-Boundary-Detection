@@ -12,13 +12,14 @@ import os
 import glob
 import pandas as pd
 
-root_deepSBD = "directory to DeepSBD dataset"
+root_deepSBD = 'directory to the deepSBD folder'
 
-output_folder='../output tv2007d' #'output tv2007t'
+output_folder='output tv2007d2' #'output tv2007t'
 
 top_folder = "tv2007d/synthetic/sharps" #"tv2007t/synthetic/sharps"
 top_children = os.path.join(root_deepSBD,top_folder)
 top_dirs = [entry.path for entry in os.scandir(top_children) if entry.is_dir()]
+
 
 def vids_10s():
     count = 0  

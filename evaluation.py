@@ -8,6 +8,9 @@ Created on Mon May  4 15:28:36 2020
 import cv2
 import numpy as np
 import pandas as pd
+import json
+import matplotlib
+import matplotlib.pylab as plt
 
 def get_frame_nr(video_file):
     cap=cv2.VideoCapture(video_file)
@@ -81,5 +84,30 @@ def evaluate_SBD(prediction, solution):
                  )
     
     return results
+
+def create_table(file='test_data/eval_result.json', outname = 'eval_result'):    
+    with open(file) as json_file:
+        data = json.load(json_file)
+        
+    conv = data['conv3D_model']
+    cin = data['cineast']
+    metrics = ['precision', 'recall', 'f1_score'] 
+    index = ['Precision', 'Recall', 'F1 Score'] 
+    
+    df = pd.DataFrame({'Conv3D': [round(conv[i],2)for i in metrics],
+                  'Cineast': [round(cin[i],2) for i in metrics]
+                  }, index=index)
+    
+    
+    fig, ax = plt.subplots(figsize=(6,6))
+    ax.axis('off')
+    
+    table = ax.table(cellText=df.values, colLabels=df.columns, colWidths=[0.25,0.25],
+                     rowLabels=df.index,edges='closed',loc='center')
+    
+    table.auto_set_font_size(False)
+    table.set_fontsize(15)
+    table.scale(1.5, 1.5)
+    fig.savefig(outname, bbox='tight', format='svg')
     
 
