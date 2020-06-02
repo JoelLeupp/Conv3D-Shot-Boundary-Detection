@@ -23,6 +23,9 @@ Input Shape: (None,64,64,10,3)
 
 ![](https://github.com/JoelLeupp/Conv3D-Shot-Boundary-Detection/blob/master/model.png)
 
+Special thanks to https://github.com/abramjos for inspiring the data preparation process as well as the data visualisation
+
+
 
 
 
