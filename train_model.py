@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 27 14:32:54 2020
-
-@author: joel
+Fine tune the model with repeated training 
 """
 import glob
 from model import Conv3D_model
@@ -22,7 +20,7 @@ model3D = Conv3D_model(lr=0.1)
 weights = 'modelWeights.h5'
 
 #train model with all 
-epoch = 20
+epoch = 100
 
 for img, cut in zip(img_set[2:],cut_set[2:]):
     print(img)
