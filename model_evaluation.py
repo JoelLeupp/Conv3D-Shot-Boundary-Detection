@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue May  5 11:24:12 2020
-
-@author: joel
+Evaluate model Predictions and compare with Cineast
 """
 from model import Conv3D_model
 import os
@@ -61,3 +59,5 @@ test_result = dict(conv3D_model = res_pre, cineast = res_cin )
 
 with open('test_data/eval_result.json','w') as f:
     json.dump(test_result, f, indent = 4)
+    
+eva.create_table('test_data/eval_result.json','results')

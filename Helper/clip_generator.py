@@ -4,9 +4,10 @@ from math import ceil
 from clip_editor import shift_channel,shift_hue,bw,blur,artifical_flash,fade
 from moviepy.editor import VideoFileClip
 
-#list of all functions for augmentation of videos
+#different processes to edit shots and augment dataset
 process=[shift_channel,shift_hue,bw,blur,artifical_flash,fade,fade]
 
+#shot generator to create an augmented video dataset
 def clip_generator(sample_vid_set,samples=10,split=.5,prob_process=.5,is_rand_sample=True):
     sample_count=0;sample=0
     process_len=len(process)
@@ -36,7 +37,7 @@ def clip_generator(sample_vid_set,samples=10,split=.5,prob_process=.5,is_rand_sa
                     try:
                         clip=process[_id](clip)
                     except:
-                        print("didn't happened..."); continue
+                        print("something went wrong..."); continue
         yield(sample_count,clip)
         
 

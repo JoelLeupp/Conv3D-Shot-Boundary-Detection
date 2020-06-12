@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon May  4 15:28:36 2020
-
-@author: joel
+Helper Functions for the evaluation 
 """
 import cv2
 import numpy as np
@@ -24,7 +22,6 @@ def get_frame_nr(video_file):
             break
     return frames
     
-
 def read_cuts(file, nr_frames):
     scene_cut= pd.read_csv(file)
     frame_nos=scene_cut['frame_no']

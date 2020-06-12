@@ -6,16 +6,15 @@ import os
 import cv2
 
 #gathering the video samples to be augmented and generated
-#direcory at Helper
 sample_vid_set=glob.glob('../output tv2007d/*.mp4')
 out_folder = "../train_data"
 out_temp = os.path.join(out_folder,'temp')
-out_name = 'test'
+out_name = 'training_set'
 
 #creating a temporary folder for the augmented videos
 os.mkdir(out_temp)
 
-#augment random videos with flash, fade-in/out, hue shifts ect.
+#temporary store sampled augmented shots
 for i,aug_clip in clip_generator(sample_vid_set,samples=10, is_rand_sample=False):
    aug_clip.write_videofile(os.path.join(out_temp,"temp_"+str(i)+".mp4"))
        

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+"""
+Visualisazion of the shot prediction
+"""
 ############################ VISUALISATION OF PREDICTION #####################
 from visualizer import visualizer
 

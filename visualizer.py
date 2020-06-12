@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jun  2 09:31:57 2020
-
-@author: joel
-"""
 import cv2
 import argparse
 import numpy as np
@@ -12,7 +7,7 @@ from math import ceil,floor
 import pandas as pd 
 
 '''
-Visualize the predictions with a controlabel panel
+Helper class to visualize the shot prediction
  
 '''
 class visualizer():

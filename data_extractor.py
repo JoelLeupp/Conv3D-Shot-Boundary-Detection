@@ -7,7 +7,7 @@ from math import ceil,floor
 import pandas as pd 
 
 '''
-Datagenerator from the video file and CSV 
+Frame Exctractor from the video file and cut information of the CSV 
  
 '''
 class data_extractor():

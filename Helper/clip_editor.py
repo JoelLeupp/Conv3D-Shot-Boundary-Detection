@@ -97,7 +97,6 @@ def blur(clip):
 def artifical_flash(clip):
     ''''
     Returns artificial flash scenerios in the video.
-    ##gamma value suitable gamma_max=1.5
     '''
     def gamma(image,frame_no):
         gamma=array[frame_no]
@@ -119,13 +118,6 @@ def artifical_flash(clip):
                 subarray.reverse()
         return sum(subarrays, [])
 
-    # def flash(image,frame):
-    #     if frame>=start and frame<(start+len_dist):
-    #         image_flash=gamma(image,sample_dist[int(frame-start)])
-    #         return(image_flash)
-    #     else:
-    #         return(image)
-
     rand_i=np.random.randint(0,clip.fps/2)
     samples=np.random.rand(1,2+int(rand_i*clip.duration))
 
@@ -135,13 +127,8 @@ def artifical_flash(clip):
 
     samples=sort(array=samples[0]*flash_intensity,num_peaks=np.random.randint(2,10))
 
-    #randx=[i+i%2+1 for i in np.array(samples).astype(np.uint8)]
     array=np.ones(int(ceil(clip.fps*clip.duration)))
     array[start:start+len(samples)]=samples
-    # import ipdb;ipdb.set_trace()
-
-    #sample_dist=gaussian(sampling,7)
-    #len_dist=len(sample_dist)
 
     return(clip.fl(lambda gf,t : gamma(gf(t),int(t*clip.fps))))
 

@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 27 11:49:57 2020
-
-@author: joel
+Create datasets for training, testing or prepare for prediction
 """
 from data_extractor import data_extractor
 import numpy as np

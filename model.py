@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue May  5 10:44:06 2020
-
-@author: joel
+implementation of 3D Conv model class
 """
 from data_extractor import data_extractor
 import numpy as np
@@ -20,7 +18,6 @@ from tensorflow.keras.callbacks import ModelCheckpoint,EarlyStopping,TensorBoard
 from tensorflow.keras.utils import to_categorical
 
 class Conv3D_model():
-    
     def __init__(self,lr=0.1):
         self.model_3d=self.model(lr)
         self.cuts = None

@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 21 14:14:13 2020
-
-@author: joel
-"""
-
-#deepSBD generate MP4 videos
 import cv2
 import os
 import glob
@@ -20,12 +13,10 @@ top_folder = "tv2007d/synthetic/sharps" #"tv2007t/synthetic/sharps"
 top_children = os.path.join(root_deepSBD,top_folder)
 top_dirs = [entry.path for entry in os.scandir(top_children) if entry.is_dir()]
 
-
-def vids_10s():
+#extract all shots with at least 10 frames from the deepSBD dataset
+def vids_10():
     count = 0  
-
     for folders in top_dirs:
-
         dirs = [entry.path for entry in os.scandir(folders) if entry.is_dir()] 
         
         #loop over shots to create the 16 frame videos
@@ -52,7 +43,6 @@ def vids_10s():
                 for i in range(len(img_array)):
                     writer.write(img_array[i])
                 writer.release()
-                
                 count +=1
-            
-vids_10s()
+        
+vids_10()
