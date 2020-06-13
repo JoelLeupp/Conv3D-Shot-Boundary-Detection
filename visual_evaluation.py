@@ -20,15 +20,15 @@ comp = visualizer(10,video, csv)
 comp.compare_prediction('test_data/predict.csv','test_data/cineast.csv')
 
 #prediction from model
-# conv = datagen(10,video, 'test_data/predict.csv')
+# conv = visualizer(10,video, 'test_data/predict.csv')
 # conv.eval_csv()
 
 # #prediction from cineast
-# cin = datagen(10,video, 'test_data/cineast.csv')
+# cin = visualizer(10,video, 'test_data/cineast.csv')
 # cin.eval_csv()
 
 # #true cuts as reference
-# ref = datagen(10,video, csv)
+# ref = visualizer(10,video, csv)
 # ref.eval_csv()
 
 
