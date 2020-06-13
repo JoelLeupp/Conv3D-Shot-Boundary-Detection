@@ -19,11 +19,30 @@ Repeat this process for how many samples where given and in the end add all thes
 
 ## 3D Convolutional Model
 Input Shape: (None,64,64,10,3)
-
+Detailed model architecture below
 
 ![](https://github.com/JoelLeupp/Conv3D-Shot-Boundary-Detection/blob/master/model.png)
 
-Special thanks to https://github.com/abramjos for inspiring the data preparation process as well as the data visualisation
+## Evaluation
+The model prediction followed by an evaluation is done with 'model_evaluation.py' which uses helper functions from 'evaluation.py' and the resuts where written to a json file. The results of the prediction on the final test/evaluation video where saved in the file 'test_data/eval_results.json'
+
+The prediction can also be visualized in a 10 frame panel video. For this the file 'visual_evaluation.py' can be run which uses helper functions from the file 'visualizer.py'.
+
+Following keyboard keys can be used to navigate through the visualizer:
+    k: stop or resume panel video
+    n: next frame 
+    q: quit video 
+
+Example of the prediction visualizer with a positive predicted sharp cut:
+
+![](https://github.com/JoelLeupp/Conv3D-Shot-Boundary-Detection/blob/master/panel_prediction.png)
+
+Example of a true negative prediction with heavy frame to frame changes (edited shot):
+
+![](https://github.com/JoelLeupp/Conv3D-Shot-Boundary-Detection/blob/master/panel_no_prediction.png)
+
+## References 
+Special thanks to https://github.com/melgharib/DSBD for linking to the deepSBD dataset, which was used to generate the automatically labeled training dataset and to https://github.com/abramjos for inspiring the data preparation process as well as the data visualisation.
 
 
 
